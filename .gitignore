@@ -1,2 +1,3 @@
 .project
 includes/config.php
+*.sql
