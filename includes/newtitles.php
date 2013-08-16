@@ -64,7 +64,7 @@ function display_newtitles_rss($query) {
 	$results = db_query($query);
 	header("Content-Type: text/xml");
 	$rss_output = "";
-	$rss_output .= "<?xml version='1.0' encoding='UTF-8'?>\n";
+	/* $rss_output .= "<?xml version='1.0' encoding='UTF-8'?>\n"; */
 	$rss_output .= "<rss version='2.0'>\n";
 	$rss_output .= "<channel>\n";
 	$rss_output .= "<title>Princeton University Library Recently Cataloged Titles</title>\n";
