@@ -519,11 +519,11 @@ function display_header ($title="") {
 	type="image/vnd.microsoft.icon">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=2, minimum-scale=1, user-scalable=yes">
-<meta about="/research" property="sioc:num_replies" content="0"
+<meta about="/catalogs/newtitles.php" property="sioc:num_replies" content="0"
 	datatype="xsd:integer">
 <meta name="Generator" content="Drupal 7 (http://drupal.org)">
-<meta content="Research" about="/research" property="dc:title">
-<title>Research | Princeton University Library</title>
+<meta content="New Titles" about="/catalogs/newtitles.php" property="dc:title">
+<title>New Titles | Princeton University Library</title>
 <link type="text/css" rel="stylesheet"
 	href="assets/css_pbm0lsQQJ7A7WCCIMgxLho6mI_kBNgznNUWmTWcnfoE.css"
 	media="all">
@@ -1072,7 +1072,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 								<a href="http://library.princeton.edu/">Home</a>
 							</div>
 						</div>
-						<h1 class="title" id="page-title">Research</h1>
+						<h1 class="title" id="page-title">Newly Cataloged Titles</h1>
 						<div
 							class="block block-system block-main block-system-main odd block-without-title"
 							id="block-system-main">
