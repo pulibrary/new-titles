@@ -63,82 +63,83 @@ function display_newtitles_rss($query) {
 	$conn = db_connect();
 	$results = db_query($query);
 	header("Content-Type: text/xml");
-	echo "<?xml version='1.0' encoding='UTF-8'?>\n";
-	echo "<rss version='2.0'>\n";
-	echo "<channel>\n";
-	echo "<title>Princeton University Library Recently Cataloged Titles</title>\n";
+	$rss_output = "";
+	$rss_output .= "<?xml version='1.0' encoding='UTF-8'?>\n";
+	$rss_output .= "<rss version='2.0'>\n";
+	$rss_output .= "<channel>\n";
+	$rss_output .= "<title>Princeton University Library Recently Cataloged Titles</title>\n";
 
-	echo "<link>http://library.princeton.edu/catalogs/newtitles.php</link>\n";
-	echo "<description>Lists the recently cataloged items.</description>\n";
+	$rss_output .= "<link>http://library.princeton.edu/catalogs/newtitles.php</link>\n";
+	$rss_output .= "<description>Lists the recently cataloged items.</description>\n";
 	$server = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 	$server = str_replace('&','&amp;',$server);
-	echo "<generator>http://$server</generator>\n";
-	#echo "<language>en-us</language>\n";
-	echo "<image>\n";
-	echo "	<url>http://library.princeton.edu/images/pulshield.gif</url>\n";
-	echo "	<title>Princeton University Logo</title>\n";
-	echo "	<link>http://library.princeton.edu/catalogs/rssfeeds/dbs.php</link>\n";
-	echo "	<width>66</width>\n";
-	echo "	<height>68</height>\n";
-	echo "</image>\n";
-	echo "<copyright>".date("Y")." Princeton University Library</copyright>\n";
-	echo "<managingEditor>abarrera@princeton.edu (Antonio Barrera)</managingEditor>\n";
-	echo "<webMaster>abarrera@princeton.edu (Antonio Barrera)</webMaster>\n";
+	$rss_output .= "<generator>http://$server</generator>\n";
+	#$rss_output .= "<language>en-us</language>\n";
+	$rss_output .= "<image>\n";
+	$rss_output .= "	<url>http://library.princeton.edu/images/pulshield.gif</url>\n";
+	$rss_output .= "	<title>Princeton University Logo</title>\n";
+	$rss_output .= "	<link>http://library.princeton.edu/catalogs/rssfeeds/dbs.php</link>\n";
+	$rss_output .= "	<width>66</width>\n";
+	$rss_output .= "	<height>68</height>\n";
+	$rss_output .= "</image>\n";
+	$rss_output .= "<copyright>".date("Y")." Princeton University Library</copyright>\n";
+	$rss_output .= "<managingEditor>abarrera@princeton.edu (Antonio Barrera)</managingEditor>\n";
+	$rss_output .= "<webMaster>abarrera@princeton.edu (Antonio Barrera)</webMaster>\n";
 
 	if (!$results) {
-		echo "<item>\n";
-		echo "	<title>Error:</title>\n";
+		$rss_output .= "<item>\n";
+		$rss_output .= "	<title>Error:</title>\n";
 
-		echo "	<link>http://library.princeton.edu/catalogs/newtitles.php</link>\n";
+		$rss_output .= "	<link>http://library.princeton.edu/catalogs/newtitles.php</link>\n";
 
-		echo "	<description>No results found.  Please visit the site and try a different feed.</description>\n";
-		echo "</item>\n";
-		echo "</channel>\n";
-		echo "</rss>\n";
+		$rss_output .= "	<description>No results found.  Please visit the site and try a different feed.</description>\n";
+		$rss_output .= "</item>\n";
+		$rss_output .= "</channel>\n";
+		$rss_output .= "</rss>\n";
 
 		return;
 	}
 	if (db_rowcount($results)==0) {
-		echo "<item>\n";
-		echo "	<title>Error:</title>\n";
+		$rss_output .= "<item>\n";
+		$rss_output .= "	<title>Error:</title>\n";
 
-		echo "	<link>http://library.princeton.edu/catalogs/newtitles.php</link>\n";
+		$rss_output .= "	<link>http://library.princeton.edu/catalogs/newtitles.php</link>\n";
 
-		echo "	<description>No results found.  Please visit the site and try a different feed.</description>\n";
-		echo "</item>\n";
-		echo "</channel>\n";
-		echo "</rss>\n";
+		$rss_output .= "	<description>No results found.  Please visit the site and try a different feed.</description>\n";
+		$rss_output .= "</item>\n";
+		$rss_output .= "</channel>\n";
+		$rss_output .= "</rss>\n";
 		return;
 	}
 
 
 
 
-	#echo "<pubDate></pubDate>\n";
-	#echo "<lastBuildDate></lastBuildDate>\n";
+	#$rss_output .= "<pubDate></pubDate>\n";
+	#$rss_output .= "<lastBuildDate></lastBuildDate>\n";
 	while ($row = db_returnrow($results)) {
-		echo "<item>\n";
+		$rss_output .= "<item>\n";
 		if ($row['titleVernancular']!='') {
 			$title = '<![CDATA['.utf8_encode(htmlentities(html_entity_decode($row['titleVernacular']))).']]>';
-			#echo "	<title>".str_replace(" & ","&amp;", str_replace("&nbsp;"," ",htmlentities2unicodeentities($row['titleVernancular'])))."</title>\n";
+			#$rss_output .= "	<title>".str_replace(" & ","&amp;", str_replace("&nbsp;"," ",htmlentities2unicodeentities($row['titleVernancular'])))."</title>\n";
 		} else {
 			$title = '<![CDATA['.utf8_encode(htmlentities(html_entity_decode($row['title']))).']]>';
-			#echo "	<title>".str_replace(" & ","&amp;", str_replace("&nbsp;"," ",htmlentities2unicodeentities($row['title'])))."</title>\n";
+			#$rss_output .= "	<title>".str_replace(" & ","&amp;", str_replace("&nbsp;"," ",htmlentities2unicodeentities($row['title'])))."</title>\n";
 		}
-		echo "<title>$title</title>\n";
+		$rss_output .= "<title>$title</title>\n";
 		$url = htmlentities("http://catalog.princeton.edu/cgi-bin/Pwebrecon.cgi?BBID=$row[bibID]");
-		echo "	<link>$url</link>\n";
-		echo "	<guid>$url</guid>\n";
+		$rss_output .= "	<link>$url</link>\n";
+		$rss_output .= "	<guid>$url</guid>\n";
 		#$br = htmlentities("<br />");
 		#$br = "<br />";
-		$desc = "Author: ".$row['author']."$br \n";
-		$desc .= "Language: ".$row['language']."$br \n";
-		$desc .= "Imprint: ".$row['imprint']."$br \n";
-		$desc .= "Location: ".$row['location']."$br \n";
-		$desc .= "Call Number: ".$row['callnumber']."$br \n";
-		$desc .= "Call Range: ".$row['callrange']."$br \n";
-		$desc .= "Call Range: ".$row['format']."$br \n";
-		$desc .= "Cataloged Date: ".date("m/d/Y",strtotime($row["catDate"]))."$br \n";
+		$desc = "Author: ".$row['author']."  \n";
+		$desc .= "Language: ".$row['language']."  \n";
+		$desc .= "Imprint: ".$row['imprint']."  \n";
+		$desc .= "Location: ".$row['location']."  \n";
+		$desc .= "Call Number: ".$row['callnumber']."  \n";
+		$desc .= "Call Range: ".$row['callrange']."  \n";
+		$desc .= "Call Range: ".$row['format']."  \n";
+		$desc .= "Cataloged Date: ".date("m/d/Y",strtotime($row["catDate"]))."  \n";
 		$desc = str_replace("&nbsp;"," ",$desc);
 		$desc = str_replace("&","&amp;", $desc);
 
@@ -150,13 +151,14 @@ function display_newtitles_rss($query) {
 
 
 		#
-		echo "	<description>$desc</description>\n";
-		echo "</item>\n";
+		$rss_output .= "	<description>$desc</description>\n";
+		$rss_output .= "</item>\n";
 	}
 
-	echo "</channel>\n";
-	echo "</rss>\n";
+	$rss_output .= "</channel>\n";
+	$rss_output .= "</rss>\n";
 
+	print($rss_output);
 	return;
 }
 
@@ -1336,5 +1338,15 @@ function display_footer() {
 <?php 
 
 
+}
+
+function htmlentities2unicodeentities ($input) {
+	$htmlEntities = array_values (get_html_translation_table (HTML_ENTITIES, ENT_QUOTES));
+	$entitiesDecoded = array_keys  (get_html_translation_table (HTML_ENTITIES, ENT_QUOTES));
+	$num = count ($entitiesDecoded);
+	for ($u = 0; $u < $num; $u++) {
+		$utf8Entities[$u] = '&#'.ord($entitiesDecoded[$u]).';';
+	}
+	return str_replace ($htmlEntities, $utf8Entities, $input);
 }
 ?>
