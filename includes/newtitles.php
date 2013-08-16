@@ -158,7 +158,7 @@ function display_newtitles_rss($query) {
 	$rss_output .= "</channel>\n";
 	$rss_output .= "</rss>\n";
 
-	print($rss_output);
+	print(trim($rss_output));
 	return;
 }
 
