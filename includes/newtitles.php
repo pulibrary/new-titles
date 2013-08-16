@@ -1,13 +1,15 @@
 <?php
 
 function display_newtitles($query, $pg) {
-	if ($pg==0) {
+	if ($pg==1) {
 		$limit = " LIMIT $pg, 100";
 	} else {
 		$limit = " LIMIT ".($pg*100).",100";
 	}
+	$limit = "";
 	$conn = db_connect();
 	$results = db_query($query.$limit);
+	$res = db_rowcount(db_query($query));
 	if (!$results) {
 		echo "<h2>No Results found.<br /><br />  Please try a new search.</h2>\n";
 		return;
@@ -16,14 +18,16 @@ function display_newtitles($query, $pg) {
 		echo "<h2>No Results found.<br /><br />  Please try a new search.</h2>\n";
 		return;
 	}
-	echo "<h2>".db_rowcount($results)." records found.</h2>\n";
+	echo "<h2>$res records found.</h2>\n";
 	if ($pg==1) {
 		$range = $pg."-".($pg+99);
 	} else {
 		$range = ($pg*100)."-".($pg*100+99);
 	}
-	echo "<h3>Records $range</h3>\n";
+	#echo "<h3>Records $range</h3>\n";
+	#echo "<p></p>";
 	
+	#echo $res % 100;
 	echo "<table id='ntitles' cellspacing='0'>";
 	echo "<tr>";
 	echo "<th>Data Cataloged</th>";
