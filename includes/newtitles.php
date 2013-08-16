@@ -76,9 +76,9 @@ function display_newtitles_rss($query) {
 	$rss_output .= "<generator>http://$server</generator>\n";
 	#$rss_output .= "<language>en-us</language>\n";
 	$rss_output .= "<image>\n";
-	$rss_output .= "	<url>http://library.princeton.edu/images/pulshield.gif</url>\n";
+	$rss_output .= "	<url>images/pulshield.gif</url>\n";
 	$rss_output .= "	<title>Princeton University Logo</title>\n";
-	$rss_output .= "	<link>http://library.princeton.edu/catalogs/rssfeeds/dbs.php</link>\n";
+	$rss_output .= "	<link>http://library.princeton.edu/catalogs/rssfeeds/newtitles.php</link>\n";
 	$rss_output .= "	<width>66</width>\n";
 	$rss_output .= "	<height>68</height>\n";
 	$rss_output .= "</image>\n";
@@ -296,7 +296,7 @@ function display_search_choices($selectedinfo) {
 	$sel = ($selectedinfo['searchtype']=='or') ? 'checked="checked"' : "";
 	echo "OR <input type='radio' value='or' name='searchtype' $sel />\n";
 	echo "</td></tr>\n";*/
-	echo "<tr><td><a href='$_SERVER[PHP_SELF]?act=comment&".$_SERVER['QUERY_STRING']."'>Comments or Suggestions</a></td><td><input type='submit' value='Go' name='submit' /><input type='reset' name='Reset' value='Clear Fields' ></td></tr>\n";
+	#echo "<tr><td><a href='$_SERVER[PHP_SELF]?act=comment&".$_SERVER['QUERY_STRING']."'>Comments or Suggestions</a></td><td><input type='submit' value='Go' name='submit' /><input type='reset' name='Reset' value='Clear Fields' ></td></tr>\n";
 
 
 	echo "</table>\n";
