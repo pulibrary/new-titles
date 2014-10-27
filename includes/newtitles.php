@@ -296,7 +296,7 @@ function display_search_choices($selectedinfo) {
 	$sel = ($selectedinfo['searchtype']=='or') ? 'checked="checked"' : "";
 	echo "OR <input type='radio' value='or' name='searchtype' $sel />\n";
 	echo "</td></tr>\n";*/
-	#echo "<tr><td><a href='$_SERVER[PHP_SELF]?act=comment&".$_SERVER['QUERY_STRING']."'>Comments or Suggestions</a></td><td><input type='submit' value='Go' name='submit' /><input type='reset' name='Reset' value='Clear Fields' ></td></tr>\n";
+	echo "<tr><td><a href='/help/contact-us'>Comments or Suggestions</a></td><td><input type='submit' value='Go' name='submit' /><input type='reset' name='Reset' value='Clear Fields' ></td></tr>\n";
 
 
 	echo "</table>\n";
@@ -620,47 +620,6 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 	</div>
 	<div class="page clearfix" id="page">
 		<header id="section-header" class="section section-header">
-		<div id="zone-alpha-wrapper"
-			class="zone-wrapper zone-alpha-wrapper clearfix">
-			<div id="zone-alpha" class="zone zone-alpha clearfix container-12">
-				<div class="grid-7 region region-advert-1" id="region-advert-1">
-					<div class="region-inner region-advert-1-inner">
-						<div
-							class="block block-block block-23 block-block-23 odd block-without-title"
-							id="block-block-23">
-							<div class="block-inner clearfix">
-
-								<div class="content clearfix">
-									<p>
-										<i class="icon-asterisk"> </i>Explore our new site and
-										provide&nbsp;<a
-											href="http://library.princeton.edu/services/new-website-feedback">Feedback</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="grid-5 region region-advert-2" id="region-advert-2">
-					<div class="region-inner region-advert-2-inner">
-						<div
-							class="block block-block block-27 block-block-27 odd block-without-title"
-							id="block-block-27">
-							<div class="block-inner clearfix">
-
-								<div class="content clearfix">
-									<p>
-										<i class="icon-external-link"></i> <a
-											href="http://library2.princeton.edu/">&nbsp;Return to Old
-											Site</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div id="zone-user-wrapper"
 			class="zone-wrapper zone-user-wrapper clearfix">
 			<div id="zone-user" class="zone zone-user clearfix container-12">
